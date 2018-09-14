@@ -16,4 +16,4 @@ run:
     - |
       cd mg-tests-demo
       npm install
-      ng test
+      npm run-script karmatest
