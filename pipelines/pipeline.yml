@@ -21,6 +21,7 @@ jobs:
     trigger: true
   - task: run-tests
     file: mg-tests-demo/pipelines/tasks/run-tests.yml
+    privileged: true
 #- name: build-and-push
 #  plan:
 #  - get: mg-tests-demo
