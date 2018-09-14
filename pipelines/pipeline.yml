@@ -4,15 +4,15 @@ resources:
   source:
     uri: https://github.com/mgiannamore/mg-tests-demo
     branch: master
-#- name: cloud-foundry-bazaz-demo
-#  type: cf
-#  source:
-#    api: https://api.sys.gn01.pcf.dcsg.com
-#    username: ((cf_user_nonprod))
-#    password: ((cf_password_nonprod))
-#    organization: bazaz-demo
-#    space: dev
-#    skip_cert_check: true
+- name: cloud-foundry-bazaz-demo
+  type: cf
+  source:
+    api: https://api.sys.gn01.pcf.dcsg.com
+    username: ((cf_user_nonprod))
+    password: ((cf_password_nonprod))
+    organization: bazaz-demo
+    space: dev
+    skip_cert_check: true
 
 jobs:
 - name: unit-test
@@ -22,14 +22,14 @@ jobs:
   - task: run-tests
     file: mg-tests-demo/pipelines/tasks/run-tests.yml
     privileged: true
-#- name: build-and-push
-#  plan:
-#  - get: mg-tests-demo
-#    trigger: true
-#  - task: run-build
-#    file: mg-tests-demo/pipelines/tasks/run-build.yml
-#    privileged: true
-#  - put: cloud-foundry-bazaz-demo
-#    params:
-#      manifest: mg-tests-demo/manifest.yml
-#      path: compiled-mg-tests-demo/
+- name: build-and-push
+  plan:
+  - get: mg-tests-demo
+    trigger: true
+  - task: run-build
+    file: mg-tests-demo/pipelines/tasks/run-build.yml
+    privileged: true
+  - put: cloud-foundry-bazaz-demo
+    params:
+      manifest: mg-tests-demo/manifest.yml
+      path: compiled-mg-tests-demo/
