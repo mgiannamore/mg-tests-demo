@@ -9,6 +9,9 @@ image_resource:
 inputs:
 - name: mg-tests-demo
 
+outputs:
+- name: mg-tests-output
+
 run:
   path: sh
   args:
