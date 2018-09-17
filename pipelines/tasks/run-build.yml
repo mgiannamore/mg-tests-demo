@@ -7,10 +7,10 @@ image_resource:
     repository: pivotalpa/angular-cli
 
 inputs:
-- name: mg-tests-demo
+- name: mg-tests-output
 
 outputs:
-- name: compiled-mg-tests-demo
+- name: compiled-mg-tests
 
 run:
   path: sh
