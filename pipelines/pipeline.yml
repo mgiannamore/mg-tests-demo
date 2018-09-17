@@ -16,6 +16,7 @@ resources:
 
 jobs:
 - name: unit-test
+  serial: true
   plan:
   - get: mg-tests-demo
     trigger: true
@@ -23,6 +24,7 @@ jobs:
     file: mg-tests-demo/pipelines/tasks/run-tests.yml
     privileged: true
 - name: build-and-push
+  serial: true
   plan:
   - get: mg-tests-demo
     trigger: true
