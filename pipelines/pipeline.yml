@@ -1,17 +1,9 @@
-resource_types:
-- name: angular-instance
-  type: docker-image
-  source:
-    repository: pivotalpa/angular-cli
-
 resources:
 - name: mg-tests-demo
   type: git
   source:
     uri: https://github.com/mgiannamore/mg-tests-demo
     branch: master
-- name: mg-tests-output
-  type: angular-instance
 - name: cloud-foundry-bazaz-demo
   type: cf
   source:
@@ -31,17 +23,16 @@ jobs:
   - task: run-tests
     file: mg-tests-demo/pipelines/tasks/run-tests.yml
     privileged: true
-  - put: mg-tests-output
 - name: build-and-push
   serial: true
   plan:
-  - get: mg-tests-output
+  - get: mg-tests-demo
     trigger: true
     passed: [unit-test]
   - task: run-build
-    file: mg-tests-output/pipelines/tasks/run-build.yml
+    file: mg-tests-demo/pipelines/tasks/run-build.yml
     privileged: true
   - put: cloud-foundry-bazaz-demo
     params:
-      manifest: mg-tests-output/manifest.yml
-      path: compiled-mg-tests/
+      manifest: mg-tests-demo/manifest.yml
+      path: compiled-mg-tests-demo/
